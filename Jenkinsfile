@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:13-alpine'
-            args '-p 3000:3000'
-        }
-    }
+    agent none
     environment {
         npm_config_cache = 'npm-cache'
         registry = 'paramveerprakash/docnest'
@@ -14,7 +9,6 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                deleteDir()
                 checkout scm   
             }
         }
@@ -30,9 +24,7 @@ pipeline {
         }
         stage('Containerize') {
             steps {
-                script {
-                 dockerImage = docker.build registry +":$BUILD_NUMBER"  
-                }
+                sh 'docker build -t paramveerprakash/docknest:latest'
             }
         }
     }
