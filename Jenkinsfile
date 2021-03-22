@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git 'git@github.com:paramveer-prakash/basic-nest.git'    
+                git 'https://github.com/paramveer-prakash/basic-nest.git'    
             }
         }
         stage('Build') {
