@@ -1,7 +1,7 @@
-FROM node:12
+FROM node:14
 
-# Create app directory, this is in our container/in our image
-WORKDIR /app
+# Create app directory
+WORKDIR /usr/src/app
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -14,8 +14,6 @@ RUN npm install
 
 # Bundle app source
 COPY . .
-
-RUN npm run build
 
 EXPOSE 3000
 CMD [ "node", "dist/main" ]
