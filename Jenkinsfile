@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git 'https://github.com/paramveer-prakash/basic-nest.git'    
+                checkout scm   
             }
         }
         stage('Build') {
