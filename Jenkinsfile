@@ -1,12 +1,9 @@
 pipeline {
     agent {
-        docker {
-            image 'node:6-alpine'
-            args '-p 3000:3000'
-        }
+        image 'node:13-alpine'
     }
     environment {
-        CI = 'true'
+        npm_config_cache = 'npm-cache'
     }
     stages {
         stage('Build') {
