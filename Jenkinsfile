@@ -6,7 +6,7 @@ pipeline {
         }
     }
     environment {
-        
+        npm_config_cache = 'npm-cache'
         registry = 'paramveerprakash/docnest'
         creds = 'dockercreds'
         dockerImage = ''
