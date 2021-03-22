@@ -1,21 +1,23 @@
-node {
-    stage('Checkout SCM') {
-        git branch: 'main', url: 'git@github.com:paramveer-prakash/basic-nest.git'
+pipeline {
+    agent {
+        docker {
+            image 'node:6-alpine'
+            args '-p 3000:3000'
+        }
     }
-
-    stage('Install node modules') {
-        sh "npm install"
+    environment {
+        CI = 'true'
     }
-
-    stage("Test") {
-        sh "npm run test-headless"
-    }
-
-    stage("Build") {
-        sh "npm run build --prod"
-    }
-    
-    stage("Copy") {
-        sh "cp -a /var/lib/jenkins/workspace/angular-pipeline/dist/jenkins-test/. /var/www/jenkins_test/html/"
+    stages {
+        stage('Build') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh './jenkins/scripts/test.sh'
+            }
+        }
     }
 }
