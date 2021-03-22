@@ -1,25 +1,21 @@
-pipeline {
-  agent {
-    docker { image 'node:latest' }
-  }
-  stages {
-    stage('Install') {
-      steps { sh 'npm install' }
+node {
+    stage('Checkout SCM') {
+        git branch: 'main', url: 'git@github.com:paramveer-prakash/basic-nest.git'
     }
- 
-    stage('Test') {
-      parallel {
-        stage('Static code analysis') {
-            steps { sh 'npm run-script lint' }
-        }
-        stage('Unit tests') {
-            steps { sh 'npm run-script test' }
-        }
-      }
+
+    stage('Install node modules') {
+        sh "npm install"
     }
- 
-    stage('Build') {
-      steps { sh 'npm run-script build' }
+
+    stage("Test") {
+        sh "npm run test-headless"
     }
-  }
+
+    stage("Build") {
+        sh "npm run build --prod"
+    }
+    
+    stage("Copy") {
+        sh "cp -a /var/lib/jenkins/workspace/angular-pipeline/dist/jenkins-test/. /var/www/jenkins_test/html/"
+    }
 }
