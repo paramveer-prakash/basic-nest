@@ -12,6 +12,11 @@ pipeline {
         dockerImage = ''
     }
     stages {
+        stage('Clone') {
+            steps {
+                git 'git@github.com:paramveer-prakash/basic-nest.git'    
+            }
+        }
         stage('Build') {
             steps {
                 sh 'npm install'
