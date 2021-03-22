@@ -7,11 +7,26 @@ pipeline {
     }
     environment {
         npm_config_cache = 'npm-cache'
+        registry = 'paramveerprakash/docnest'
+        creds = 'dockercreds'
+        dockerImage = ''
     }
     stages {
         stage('Build') {
             steps {
                 sh 'npm install'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'npm test'
+            }
+        }
+        stage('Containerize') {
+            steps {
+                script {
+                 dockerImage = docker.build registry +":$BUILD_NUMBER"  
+                }
             }
         }
     }
