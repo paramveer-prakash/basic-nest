@@ -15,10 +15,10 @@ node {
     }*/
 
     stage('Deploy') {
-        sh "aws cloudformation create-stack --stack-name s3bucket \
+        sh "aws cloudformation create-stack --stack-name js3bucket \
         --template-body file://s3cft_new.yaml \
         --region 'us-east-1' \
-        --parameters ParameterKey=BName, ParameterValue=JBucken"
+        --parameters  ParameterKey=BName,ParameterValue=JenkinsBucket "
     }
     
 }
