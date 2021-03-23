@@ -18,7 +18,7 @@ node {
         sh "aws cloudformation create-stack --stack-name s3bucket \
         --template-body file://s3cft_new.yaml \
         --region 'us-east-1' \
-        --parameters BName=JBucken"
+        --parameters ParameterKey=BName, ParameterValue=JBucken"
     }
     
 }
