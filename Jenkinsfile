@@ -21,12 +21,12 @@ node {
             sh "aws cloudformation update-stack --stack-name newjs3bucket \
             --template-body file://s3cft_new.yaml \
             --region 'us-east-1' \
-            --parameters  ParameterKey=BName,ParameterValue=JenkinsBucket "
+            --parameters  ParameterKey=BName,ParameterValue=${StackAction} "
         }else if(params.StackAction=="create"){
             sh "aws cloudformation create-stack --stack-name params.StackAction \
             --template-body file://s3cft_new.yaml \
             --region 'us-east-1' \
-            --parameters  ParameterKey=BName,ParameterValue=params.StackAction "
+            --parameters  ParameterKey=BName,ParameterValue=${StackAction} "
         }else{
             echo "No action on stack"
         }
