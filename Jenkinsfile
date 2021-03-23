@@ -15,6 +15,7 @@ node {
     }*/
 
     stage('Deploy') {
+        echo "${NestAppImageName}"
         sh "aws cloudformation create-stack --stack-name js3bucket \
         --template-body file://s3cft_new.yaml \
         --region 'us-east-1' \
