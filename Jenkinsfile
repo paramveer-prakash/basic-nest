@@ -15,11 +15,23 @@ node {
     }*/
 
     stage('Deploy') {
-        echo "${NestAppImageName}"
-        sh "aws cloudformation update-stack --stack-name newjs3bucket \
-        --template-body file://s3cft_new.yaml \
-        --region 'us-east-1' \
-        --parameters  ParameterKey=BName,ParameterValue=JenkinsBucket "
+        echo "${StackAction}"
+        
+        if(params.StackAction=="update"){
+            sh "aws cloudformation update-stack --stack-name newjs3bucket \
+            --template-body file://s3cft_new.yaml \
+            --region 'us-east-1' \
+            --parameters  ParameterKey=BName,ParameterValue=JenkinsBucket "
+        }else if(params.StackAction=="create"){
+            sh "aws cloudformation create-stack --stack-name newjs3bucket \
+            --template-body file://s3cft_new.yaml \
+            --region 'us-east-1' \
+            --parameters  ParameterKey=BName,ParameterValue=JenkinsBucket "
+        }else{
+            echo "No action on stack"
+        }
+        
+        
     }
     
 }
