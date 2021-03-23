@@ -23,7 +23,7 @@ node {
             --region 'us-east-1' \
             --parameters  ParameterKey=BName,ParameterValue=${StackAction} "
         }else if(params.StackAction=="create"){
-            sh "aws cloudformation create-stack --stack-name params.StackAction \
+            sh "aws cloudformation create-stack --stack-name newjs3bucket \
             --template-body file://s3cft_new.yaml \
             --region 'us-east-1' \
             --parameters  ParameterKey=BName,ParameterValue=${StackAction} "
