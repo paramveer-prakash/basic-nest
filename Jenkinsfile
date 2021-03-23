@@ -23,10 +23,10 @@ node {
             --region 'us-east-1' \
             --parameters  ParameterKey=BName,ParameterValue=JenkinsBucket "
         }else if(params.StackAction=="create"){
-            sh "aws cloudformation create-stack --stack-name newjs3bucket \
+            sh "aws cloudformation create-stack --stack-name params.StackAction \
             --template-body file://s3cft_new.yaml \
             --region 'us-east-1' \
-            --parameters  ParameterKey=BName,ParameterValue=JenkinsBucket "
+            --parameters  ParameterKey=BName,ParameterValue=params.StackAction "
         }else{
             echo "No action on stack"
         }
