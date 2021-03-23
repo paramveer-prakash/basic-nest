@@ -7,6 +7,6 @@ Resources:
     Type: AWS::S3::Bucket
     Properties: 
         BucketName: !Ref BName
-Outputs
+Outputs:
   BucketName:
     Value: !Ref 'S3Bucket'
