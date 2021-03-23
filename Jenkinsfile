@@ -16,7 +16,7 @@ node {
 
     stage('Deploy') {
         echo "${NestAppImageName}"
-        sh "aws cloudformation create-stack --stack-name js3bucket \
+        sh "aws cloudformation update-stack --stack-name newjs3bucket \
         --template-body file://s3cft_new.yaml \
         --region 'us-east-1' \
         --parameters  ParameterKey=BName,ParameterValue=JenkinsBucket "
