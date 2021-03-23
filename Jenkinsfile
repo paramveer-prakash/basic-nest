@@ -1,12 +1,21 @@
 node {
 
-    checkout scm
-
-    docker.withRegistry('https://registry.hub.docker.com', 'dockercreds') {
-
-        def customImage = docker.build("paramveerprakash/docnest")
-
-        /* Push the container to the custom Registry */
-        customImage.push()
+    stage('Chekcout') {
+        checkout scm
     }
+    
+    /*stage('Containerize') {
+        docker.withRegistry('https://registry.hub.docker.com', 'dockercreds') {
+
+                def customImage = docker.build("paramveerprakash/docnest")
+
+                // Push the container to the custom Registry
+                customImage.push()
+        }
+    }*/
+
+    stage('Deploy') {
+        sh "aws cloudformation create-stack --stack-name s3bucket --template-body file://s3cft.json --region 'ap-south-1'"
+    }
+    
 }
