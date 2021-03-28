@@ -5,7 +5,6 @@ node {
     }
     
     stage('Containerize') {
-        @FOR /f "tokens=*" %i IN ('docker-machine env --shell cmd default') DO @%i
         docker.withRegistry('https://registry.hub.docker.com', 'dockercreds') {
 
                 def customImage = docker.build("paramveerprakash/docnest")
